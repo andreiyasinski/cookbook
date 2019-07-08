@@ -12,7 +12,6 @@ export default class AddForm extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(this.state.name)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -21,11 +20,15 @@ export default class AddForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({
+      name: '',
+      time: '',
+      image: defaultImage,
       recipes: [{name: this.state.name, time: this.state.time, image: defaultImage}, ...this.state.recipes]
     })
   }
 
   render() {
+    const recipeItems = this.state.recipes.map((item, index) => <RecipeItem key={index} item={item} />)
     return (
       <div>
         <form className={styles.add_form} onSubmit={this.handleSubmit}>
@@ -52,7 +55,7 @@ export default class AddForm extends React.Component {
           />
           <button className={styles.button}>Добавить рецепт</button>
         </form>
-        <RecipeItem />
+        {recipeItems}
       </div>
     )
   }

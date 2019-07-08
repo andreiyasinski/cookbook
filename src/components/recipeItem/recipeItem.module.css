@@ -1,0 +1,12 @@
+.container {
+  border-bottom: 1px solid grey;
+  padding: 15px;
+}
+
+.name {
+  margin-bottom: 10px;
+}
+
+.time {
+  margin-bottom: 10px;
+}
