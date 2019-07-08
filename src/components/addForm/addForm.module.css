@@ -1,0 +1,21 @@
+.add_form {
+  display: flex;
+  flex-direction: column;
+  /*border: 1px solid #000;*/
+  padding: 20px;
+}
+
+.input {
+  padding: 5px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.add_image {
+  margin-bottom: 10px;
+}
+
+.button {
+  padding: 5px;
+  width: 300px;
+}
