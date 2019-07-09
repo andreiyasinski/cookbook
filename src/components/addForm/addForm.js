@@ -27,8 +27,7 @@ export default class AddForm extends React.Component {
 
     reader.onloadend = () => {
       this.setState({
-        file: file,
-        image: reader.result,
+        image: reader.result
       });
     }
 
@@ -52,7 +51,7 @@ export default class AddForm extends React.Component {
 
   render() {
     const recipeItems = this.state.recipes.map((item, index) => (
-      <RecipeItem key={index} name={item.name} time={item.time} image={item.image} />
+      <RecipeItem key={index} item={item}/>
     ));
 
     return (

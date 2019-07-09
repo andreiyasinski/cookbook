@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 const RecipeItem = props => {
   return (
     <div className={styles.container}>
-      <h3 className={styles.name}>{props.name}</h3>
-      <p className={styles.time}>{props.time}</p>
-      <img src={props.image} alt='recipe' />
+      <h3 className={styles.name}>{props.item.name}</h3>
+      <p className={styles.time}>{props.item.time}</p>
+      <img src={props.item.image} alt='recipe' />
     </div>
   )
 }
 
 RecipeItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  time: PropTypes.string,
-  image: PropTypes.string
+  item: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    time: PropTypes.string,
+    image: PropTypes.string
+  })
 }
 
 export default RecipeItem;
