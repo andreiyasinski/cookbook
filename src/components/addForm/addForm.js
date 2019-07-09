@@ -8,6 +8,7 @@ export default class AddForm extends React.Component {
     name: '',
     time: '',
     image: defaultImage,
+    file: '',
     recipes : []
   }
 
@@ -17,18 +18,39 @@ export default class AddForm extends React.Component {
     })
   }
 
+  handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        image: reader.result,
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      name: '',
-      time: '',
-      image: defaultImage,
-      recipes: [{name: this.state.name, time: this.state.time, image: defaultImage}, ...this.state.recipes]
-    })
+    if (this.state.name.trim()) {
+      this.setState({
+        name: '',
+        time: '',
+        image: defaultImage,
+        fileLoaderValue: '',
+        recipes: [{name: this.state.name, time: this.state.time, image: this.state.image}, ...this.state.recipes]
+      })
+    }
+    
   }
 
   render() {
-    const recipeItems = this.state.recipes.map((item, index) => <RecipeItem key={index} item={item} />)
+    const recipeItems = this.state.recipes.map((item, index) => <RecipeItem key={index} item={item} />);
+
     return (
       <div>
         <form className={styles.add_form} onSubmit={this.handleSubmit}>
@@ -52,6 +74,7 @@ export default class AddForm extends React.Component {
             type='file'
             className={styles.add_image}
             accept='image/jpeg,image/png'
+            onChange={(e)=>this.handleImageChange(e)}
           />
           <button className={styles.button}>Добавить рецепт</button>
         </form>
