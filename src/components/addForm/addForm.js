@@ -9,14 +9,16 @@ export default class AddForm extends React.Component {
     time: '',
     image: defaultImage,
     file: '',
-    recipes : []
+    recipes : [],
+    inputBg: ''
   }
 
   imageLoader = React.createRef();
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      inputBg: ''
     })
   }
 
@@ -45,6 +47,8 @@ export default class AddForm extends React.Component {
         recipes: [{name: this.state.name, time: this.state.time, image: this.state.image}, ...this.state.recipes]
       });
       this.imageLoader.current.value = '';
+    } else {
+      this.setState({inputBg: 'rgba(255, 0, 0, 0.15)'})
     }
     
   }
@@ -64,6 +68,7 @@ export default class AddForm extends React.Component {
             className={styles.input}
             value = {this.state.name}
             onChange = {this.handleChange}
+            style={{background: `${this.state.inputBg}`}}
           />
           <input
             name = 'time'
