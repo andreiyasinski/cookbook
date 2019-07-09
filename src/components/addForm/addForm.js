@@ -51,7 +51,9 @@ export default class AddForm extends React.Component {
   }
 
   render() {
-    const recipeItems = this.state.recipes.map((item, index) => <RecipeItem key={index} item={item} />);
+    const recipeItems = this.state.recipes.map((item, index) => (
+      <RecipeItem key={index} name={item.name} time={item.time} image={item.image} />
+    ));
 
     return (
       <div>
