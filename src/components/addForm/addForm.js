@@ -12,6 +12,8 @@ export default class AddForm extends React.Component {
     recipes : []
   }
 
+  imageLoader = React.createRef();
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -20,7 +22,6 @@ export default class AddForm extends React.Component {
 
   handleImageChange(e) {
     e.preventDefault();
-
     let reader = new FileReader();
     let file = e.target.files[0];
 
@@ -43,7 +44,8 @@ export default class AddForm extends React.Component {
         image: defaultImage,
         fileLoaderValue: '',
         recipes: [{name: this.state.name, time: this.state.time, image: this.state.image}, ...this.state.recipes]
-      })
+      });
+      this.imageLoader.current.value = '';
     }
     
   }
@@ -72,6 +74,8 @@ export default class AddForm extends React.Component {
           />
           <input 
             type='file'
+            id="image_loader"
+            ref={this.imageLoader}
             className={styles.add_image}
             accept='image/jpeg,image/png'
             onChange={(e)=>this.handleImageChange(e)}
