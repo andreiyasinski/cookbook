@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './addForm.module.css';
-import RecipeItem from '../recipeItem/recipeItem';
 import defaultImage from '../../assets/default-image.jpg';
 
 export default class AddForm extends React.Component {
@@ -9,7 +8,6 @@ export default class AddForm extends React.Component {
     time: '',
     image: defaultImage,
     file: '',
-    recipes : [],
     isValid: true
   }
 
@@ -24,7 +22,7 @@ export default class AddForm extends React.Component {
 
   handleImageChange = e => {
     e.preventDefault();
-    let reader = new FileReader();
+    const reader = new FileReader();
     let file = e.target.files[0];
 
     reader.onloadend = () => {
@@ -39,13 +37,18 @@ export default class AddForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let {name, time, image} = this.state;
+    const recipe = {
+      name: name,
+      time: time,
+      image: image,
+    }
     if (this.state.name.trim()) {
+      this.props.addRecipe(recipe);
       this.setState({
         name: '',
         time: '',
         image: defaultImage,
         fileLoaderValue: '',
-        recipes: [{name: name, time: time, image: image}, ...this.state.recipes]
       });
       this.imagesLoaderRef.current.value = '';
     } else {
@@ -85,9 +88,6 @@ export default class AddForm extends React.Component {
           />
           <button className={styles.button}>Добавить рецепт</button>
         </form>
-        <ul>
-          {this.state.recipes.map((item, index) => (<RecipeItem key={index} item={item}/>))}
-        </ul>
       </div>
     )
   }
