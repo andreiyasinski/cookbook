@@ -10,15 +10,15 @@ export default class AddForm extends React.Component {
     image: defaultImage,
     file: '',
     recipes : [],
-    inputBg: ''
+    isValid: true
   }
 
-  imageLoaderRef = React.createRef();
+  imagesLoaderRef = React.createRef();
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
-      inputBg: ''
+      isValid: true
     })
   }
 
@@ -38,17 +38,18 @@ export default class AddForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    let {name, time, image} = this.state;
     if (this.state.name.trim()) {
       this.setState({
         name: '',
         time: '',
         image: defaultImage,
         fileLoaderValue: '',
-        recipes: [{name: this.state.name, time: this.state.time, image: this.state.image}, ...this.state.recipes]
+        recipes: [{name: name, time: time, image: image}, ...this.state.recipes]
       });
-      this.imageLoaderRef.current.value = '';
+      this.imagesLoaderRef.current.value = '';
     } else {
-      this.setState({inputBg: "rgba(255, 0, 0, 0.15)"})
+      this.setState({isValid: false})
     }
     
   }
@@ -62,10 +63,9 @@ export default class AddForm extends React.Component {
             name="name"
             type="text"
             placeholder="Название..."
-            className={styles.input}
+            className={`${styles.input} ${!this.state.isValid ? styles.invalitInput : ''}`}
             value={this.state.name}
             onChange={this.handleChange}
-            style={{background: `${this.state.inputBg}`}}
           />
           <input
             name="time"
@@ -78,14 +78,16 @@ export default class AddForm extends React.Component {
           <input
             type="file"
             id="image_loader"
-            ref={this.imageLoaderRef}
+            ref={this.imagesLoaderRef}
             className={styles.add_image}
             accept="image/jpeg,image/png"
             onChange={(e)=>this.handleImageChange(e)}
           />
           <button className={styles.button}>Добавить рецепт</button>
         </form>
-        {this.state.recipes.map((item, index) => (<RecipeItem key={index} item={item}/>))}
+        <ul>
+          {this.state.recipes.map((item, index) => (<RecipeItem key={index} item={item}/>))}
+        </ul>
       </div>
     )
   }

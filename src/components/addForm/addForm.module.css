@@ -13,9 +13,14 @@
 
 .add_image {
   margin-bottom: 10px;
+  width: 300px;
 }
 
 .button {
   padding: 5px;
   width: 300px;
+}
+
+.invalitInput {
+  background: rgba(255, 0, 0, 0.15);
 }
