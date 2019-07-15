@@ -3,6 +3,7 @@ import styles from './recipes.module.css';
 import RecipeItem from '../recipeItem/recipeItem';
 
 export default class Recipes extends React.Component {
+
   render() {
     return (
       <div className={styles.container}>
