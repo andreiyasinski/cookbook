@@ -38,7 +38,7 @@ export default class AddForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let { name, time, image } = this.state;
+    const { name, time, image } = this.state;
     const recipe = {
       name: name,
       time: time,

@@ -9,7 +9,7 @@ export default class Recipes extends React.Component {
       <div className={styles.container}>
         <h3>List of recipes:</h3>
         <ul className={styles.list}>
-          {this.props.recipes.map((item, index) => (<RecipeItem key={index} item={item}/>))}
+          {this.props.recipes.map((item, index) => (<RecipeItem key={item.id} item={item}/>))}
         </ul>
       </div>
     )

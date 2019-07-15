@@ -11,8 +11,9 @@ export default class App extends React.Component {
   }
 
   addRecipe = (recipe) => {
+    const uuidv4 = require('uuid/v4');
     this.setState({
-      recipes: [{name: recipe.name, time: recipe.time, image: recipe.image}, ...this.state.recipes]
+      recipes: [{ name: recipe.name, time: recipe.time, image: recipe.image, id: uuidv4() }, ...this.state.recipes]
     })
   }
 
@@ -22,7 +23,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path="/profile" component={Profile} />
           <Route path="/add" render={() => <AddForm addRecipe={this.addRecipe} />} />
-          <Route path="/" exact render={() => <Recipes recipes={this.state.recipes}/>} />
+          <Route path="/" exact render={() => <Recipes recipes={this.state.recipes} />} />
         </Switch>
       </Layout>
     )
