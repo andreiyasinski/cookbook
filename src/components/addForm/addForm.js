@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './addForm.module.css';
 import defaultImage from '../../assets/default-image.jpg';
-import classNames  from 'classnames/bind';
-let cn = classNames.bind(styles);
+import cn  from 'classnames/bind';
 
 export default class AddForm extends React.Component {
   state = {
@@ -67,7 +66,7 @@ export default class AddForm extends React.Component {
             type="text"
             placeholder="Название..."
             //className={`${styles.input} ${!this.state.isValid ? styles.invalidInput : ''}`}
-            className={cn(styles.input, {invalidInput: !this.state.isValid})}
+            className={cn(styles.input, {[styles.invalidInput]: !this.state.isValid})}
             value={this.state.name}
             onChange={this.handleChange}
           />

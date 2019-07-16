@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const RecipeItem = props => {
   return (
-    <li className={styles.container}>
+    <div className={styles.container}>
       <h3 className={styles.name}>{props.item.name}</h3>
       <p className={styles.time}>{props.item.time}</p>
       <img src={props.item.image} className={styles.image} alt="recipe" />
-    </li>
+    </div>
   )
 }
 

@@ -3,7 +3,9 @@ import Layout from '../layout/layout';
 import Profile from '../profile/profile';
 import AddForm from '../addForm/addForm';
 import Recipes from '../recipes/recipes';
-import {Route, Switch} from 'react-router-dom';
+import RecipeDetails from '../recipeDetails/recipeDetails';
+import { Route, Switch } from 'react-router-dom';
+import uuidv4 from 'uuid/v4';
 
 export default class App extends React.Component {
   state = {
@@ -11,9 +13,13 @@ export default class App extends React.Component {
   }
 
   addRecipe = (recipe) => {
-    const uuidv4 = require('uuid/v4');
     this.setState({
-      recipes: [{ name: recipe.name, time: recipe.time, image: recipe.image, id: uuidv4() }, ...this.state.recipes]
+      recipes: [{
+        name: recipe.name,
+        time: recipe.time,
+        image: recipe.image,
+        id: uuidv4()
+      }, ...this.state.recipes]
     })
   }
 
@@ -24,6 +30,11 @@ export default class App extends React.Component {
           <Route path="/profile" component={Profile} />
           <Route path="/add" render={() => <AddForm addRecipe={this.addRecipe} />} />
           <Route path="/" exact render={() => <Recipes recipes={this.state.recipes} />} />
+          <Route
+            path="/recipe/:id"
+            render={(props) => <RecipeDetails {...props} recipes={this.state.recipes} />}
+            exact
+          />
         </Switch>
       </Layout>
     )
