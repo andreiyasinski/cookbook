@@ -5,8 +5,8 @@ import {NavLink} from 'react-router-dom';
 const Header = props => {
   return (
     <header className={styles.header}>
-      <NavLink to="/" className={styles.logo}>CookBook</NavLink>
-      <NavLink to="/profile" className={styles.profileLink}>Profile</NavLink>
+      <NavLink to="/" exact className={styles.logo} activeClassName={styles.active}>CookBook</NavLink>
+      <NavLink to="/profile" className={styles.profileLink} activeClassName={styles.active}>Profile</NavLink>
     </header>
   )
 }
