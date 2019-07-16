@@ -1,5 +1,6 @@
 .container {
-  border-bottom: 1px solid grey;
+  border: 1px solid grey;
+  padding: 10px;
 }
 
 .name {
