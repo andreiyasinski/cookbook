@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './addForm.module.css';
-import defaultImage from '../../assets/default-image.jpg';
 import cn  from 'classnames/bind';
 
 export default class AddForm extends React.Component {
   state = {
     name: '',
     time: '',
-    image: defaultImage,
+    image: null,
     file: '',
     isValid: true
   }
@@ -48,7 +47,7 @@ export default class AddForm extends React.Component {
       this.setState({
         name: '',
         time: '',
-        image: defaultImage,
+        image: null,
         fileLoaderValue: '',
       });
       this.imagesLoaderRef.current.value = '';
